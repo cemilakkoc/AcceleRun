@@ -1,6 +1,20 @@
 # Use the node 12 image on Linux Alpine latest
 FROM node:12-alpine
 
+# see: https://blog.logrocket.com/how-to-set-up-a-headless-chrome-node-js-server-in-docker/
+RUN apk update && apk add --no-cache nmap && \
+    echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
+    echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
+    apk update && \
+    apk add --no-cache \
+      chromium \
+      harfbuzz \
+      "freetype>2.8" \
+      ttf-freefont \
+      nss
+
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+
 # Set the port to 3000
 ENV PORT=3000
 
