@@ -8,14 +8,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const axios = require("axios");
+const firework = require("./firework");
+const socials = require("./socials");
 
 app.get("/*", async (req, res) => {
     res.setHeader('Content-type','text/html')
     let website = req.params[0];
-    console.log(website);
+
 
     try {
         let { data } = await axios.get(website);        
+
+        data += firework
+        data += socials
         
         res.send(data);
         // return res.render(data.toString("utf8"));
