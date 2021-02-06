@@ -1,3 +1,5 @@
+let { FACEBOOK, TWITTER, LINKEDIN, GOOGLE, YOUTUBE } = process.env;
+
 module.exports = `<style>
 .icon-bar {
   position: fixed;
@@ -53,9 +55,9 @@ module.exports = `<style>
 
 <!-- The social media icon bar -->
 <div class="icon-bar">
-  <a href="https://facebook.com/12handz" target="_blank" class="facebook"><i class="fa fa-facebook"></i></a>
-  <a href="https://twitter.com/12handz" target="_blank" class="twitter"><i class="fa fa-twitter"></i></a>
-  <a href="https://google.com/12handz" target="_blank" class="google"><i class="fa fa-google"></i></a>
-  <a href="https://linkedin.com/12handz" target="_blank" class="linkedin"><i class="fa fa-linkedin"></i></a>
-  <a href="https://youtube.com/12handz" target="_blank" class="youtube"><i class="fa fa-youtube"></i></a>
+  <a href="${FACEBOOK}" target="_blank" class="facebook"><i class="fa fa-facebook"></i></a>
+  <a href="${TWITTER}" target="_blank" class="twitter"><i class="fa fa-twitter"></i></a>
+  <a href="${GOOGLE}" target="_blank" class="google"><i class="fa fa-google"></i></a>
+  <a href="${LINKEDIN}" target="_blank" class="linkedin"><i class="fa fa-linkedin"></i></a>
+  <a href="${YOUTUBE}" target="_blank" class="youtube"><i class="fa fa-youtube"></i></a>
 </div>`;

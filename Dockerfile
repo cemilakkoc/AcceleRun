@@ -4,6 +4,13 @@ FROM node:12-alpine
 # Set the port to 3000
 ENV PORT=3000
 
+# Set the socials
+ENV FACEBOOK="https://www.facebook.com/12handz"
+ENV TWITTER="https://twitter.com/12handz"
+ENV LINKEDIN="https://linkedin.com/in/12handz"
+ENV INSTAGRAM="https://instagram.com/12handz"
+ENV YOUTUBE="https://youtube.com/12handz"
+
 # Expose the port so we can access the container
 EXPOSE ${PORT}
 
