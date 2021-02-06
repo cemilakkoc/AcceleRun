@@ -235,7 +235,7 @@ visibility: hidden;
 }
 100% {
   visibility: visible;
-  opacity: 1;
+  opacity: 0.7;
 }
 }
 .pyro {
