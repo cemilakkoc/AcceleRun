@@ -35,7 +35,7 @@ getHTML = async (url) => {
     return html;
 }
 
-app.get("/*", async (req, res) => {
+app.get("/website/*", async (req, res) => {
     res.setHeader('Content-type','text/html')
     let website = req.params[0];
     
