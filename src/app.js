@@ -2,11 +2,6 @@ require("dotenv").config();
 
 const app = require("express")();
 
-// use bodyparser mw to get req.body object
-const bodyParser = require("body-parser");
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-
 const axios = require("axios");
 const firework = require("./firework");
 const socials = require("./socials");
