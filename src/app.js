@@ -9,23 +9,28 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const axios = require("axios");
 
-app.post("/website", async (req, res) => {
-    let { website } = req.body;
+app.get("/*", async (req, res) => {
+    res.setHeader('Content-type','text/html')
+    let website = req.params[0];
+    console.log(website);
 
     try {
         let { data } = await axios.get(website);        
         
-        return res.json({
-            code: 200,
-            data: data
-        })
+        res.send(data);
+        // return res.render(data.toString("utf8"));
 
     } catch (e) {
-        return res.status(400).json({
-            error: "The given url is invalid or not reachable.",
-            code: 400,
-            status: "error"
-        })
+        return res.status(404).send(`
+            <html>
+                <head>
+                    <title>Not Found</title>
+                </head>
+                <body>
+                    <h4>Not Found</h4>
+                </body>
+            </html>
+        `)
     }
     
     
