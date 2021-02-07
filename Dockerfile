@@ -52,8 +52,8 @@ RUN mkdir /home/node/app/src/public/css
 RUN mkdir /home/node/app/src/public/js
 
 # Move bootstrap css & js into those folders.
-RUN cp /home/node/app/node_modules/bootstrap/dist/css/bootstrap.min.css
-RUN cp /home/node/app/node_modules/bootstrap/dist/js/bootstrap.min.js
+# RUN cp /home/node/app/node_modules/bootstrap/dist/css/bootstrap.min.css
+# RUN cp /home/node/app/node_modules/bootstrap/dist/js/bootstrap.min.js
 
 # Run the app.js
 CMD [ "node", "src/app.js"]
