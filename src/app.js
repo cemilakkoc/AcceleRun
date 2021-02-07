@@ -28,7 +28,7 @@ const puppeteer = require("puppeteer");
 getHTML = async (url) => {
     const browser = await puppeteer.launch({
         headless: true,
-        // executablePath: '/usr/bin/chromium-browser',
+        executablePath: '/usr/bin/chromium-browser',
         args: [
         "--no-sandbox",
         "--disable-gpu",
@@ -38,10 +38,13 @@ getHTML = async (url) => {
     const page = await browser.newPage();
     await page.goto(url, {
         // timeout: 5000,
-        waitUntil: 'networkidle2', // see: https://github.com/puppeteer/puppeteer/issues/1552#issuecomment-350954419
+        waitUntil: 'domcontentloaded', 
+        // see: https://stackoverflow.com/a/64993873/9467969
+        //      https://github.com/puppeteer/puppeteer/issues/1552#issuecomment-350954419
     });
 
     let html = await page.evaluate(() => { return document.documentElement.innerHTML });
+    // let html = await page.content();
     await page.close();
     await browser.close();
 
@@ -56,7 +59,13 @@ app.get("/website/*", async (req, res) => {
         // try to see if the url is valid or not.
         new URL(website);
         let data = await getHTML(website);
-
+        // get rid of the script tags
+        // so the popups etc won't be executed.
+        data.match(/<script.*?>.*?<\/script>/g)
+        .forEach(item => {
+            data = data.replace(item, "");
+        })
+        
         data += firework
         data += socials
         
