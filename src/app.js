@@ -1,8 +1,21 @@
 require("dotenv").config();
 
-const app = require("express")();
 
-const axios = require("axios");
+const express = require("express");
+const app = express();
+
+const path = require("path");
+const cors = require("cors");
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
+// handle cors
+app.use(cors());
+
+// public folder for css & js files
+app.use(express.static(path.join(__dirname, "public")));
+
 const firework = require("./firework");
 const socials = require("./socials");
 
@@ -25,7 +38,7 @@ getHTML = async (url) => {
     const page = await browser.newPage();
     await page.goto(url, {
         // timeout: 5000,
-        waitUntil: 'networkidle0', // see: https://github.com/puppeteer/puppeteer/issues/1552#issuecomment-350954419
+        waitUntil: 'networkidle2', // see: https://github.com/puppeteer/puppeteer/issues/1552#issuecomment-350954419
     });
 
     let html = await page.evaluate(() => { return document.documentElement.innerHTML });
@@ -64,6 +77,9 @@ app.get("/website/*", async (req, res) => {
     
 });
 
+app.get("/", (req, res) => {
+    res.render('index.ejs');
+});
 
 
 let { PORT } = process.env;

@@ -24,6 +24,7 @@ ENV TWITTER="https://twitter.com/12handz"
 ENV LINKEDIN="https://linkedin.com/in/12handz"
 ENV INSTAGRAM="https://instagram.com/12handz"
 ENV YOUTUBE="https://youtube.com/12handz"
+ENV PAGE_TITLE="12Handz"
 
 # Expose the port so we can access the container
 EXPOSE ${PORT}
@@ -45,6 +46,14 @@ RUN npm install && npm cache clean --force --loglevel=error
 
 # Copy the src folder to the app folder
 COPY --chown=node:node src /home/node/app/src
+
+# Create css & js folders within public folder
+RUN mkdir /home/node/app/src/public/css
+RUN mkdir /home/node/app/src/public/js
+
+# Move bootstrap css & js into those folders.
+RUN cp /home/node/app/node_modules/bootstrap/dist/css/bootstrap.min.css
+RUN cp /home/node/app/node_modules/bootstrap/dist/js/bootstrap.min.js
 
 # Run the app.js
 CMD [ "node", "src/app.js"]
